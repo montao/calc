@@ -1,5 +1,5 @@
 # calc
-A calculator done with GNU flex and bison. 
+A calculator done with GNU flex and bison. For more information, read the book by John Lexon about flex and bison. 
 
 # instructions
 
