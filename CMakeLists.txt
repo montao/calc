@@ -3,28 +3,20 @@ project(calc)
 
 set(CMAKE_C_STANDARD 99)
 
-FIND_PACKAGE(BISON REQUIRED)
-SET(BisonOutput ${CMAKE_SOURCE_DIR}/parser.c)
-IF(BISON_FOUND)
-    ADD_CUSTOM_COMMAND(
-            OUTPUT ${BisonOutput}
-            COMMAND ${BISON_EXECUTABLE}
-            --output=${BisonOutput}
-            ${CMAKE_SOURCE_DIR}/fb1-5.y
-            COMMENT "Generating parser.c"
-    )
-ENDIF()
+find_package(BISON)
+find_package(FLEX)
 
-FIND_PACKAGE(FLEX REQUIRED)
-SET(FlexOutput ${CMAKE_SOURCE_DIR}/scanner.c)
-IF(FLEX_FOUND)
-    ADD_CUSTOM_COMMAND(
-            OUTPUT ${FlexOutput}
-            COMMAND ${FLEX_EXECUTABLE}
-            --outfile=${FlexOutput}
-            ${CMAKE_SOURCE_DIR}/fb1-5.l
-            COMMENT "Generating scanner.c"
-    )
-ENDIF()
 
-ADD_EXECUTABLE(c-exec ${BisonOutput} ${FlexOutput})
+BISON_TARGET(MyParser fb1-5.y ${CMAKE_CURRENT_BINARY_DIR}/parser.c)
+FLEX_TARGET(MyScanner fb1-5.l  ${CMAKE_CURRENT_BINARY_DIR}/lexer.c)
+ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
+
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+add_executable(calc
+
+        ${BISON_MyParser_OUTPUTS}
+        ${FLEX_MyScanner_OUTPUTS}
+        )
+target_link_libraries(calc fl)
