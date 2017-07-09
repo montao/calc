@@ -8,7 +8,7 @@
 %token EOL
 %%
 calclist: /* nothing */                       
- | calclist exp EOL { printf("= %d\n", $1); } 
+ | calclist exp EOL { printf("= %d\n", $2); }
  ;
 exp: factor       
  
