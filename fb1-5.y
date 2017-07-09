@@ -1,4 +1,3 @@
-
 /* simplest version of calculator */
 %{
 #include <stdio.h>
@@ -9,7 +8,7 @@
 %token EOL
 %%
 calclist: /* nothing */                       
- | calclist exp EOL { printf("= %d\n", $2); } 
+ | calclist exp EOL { printf("= %d\n", $1); } 
  ;
 exp: factor       
  
