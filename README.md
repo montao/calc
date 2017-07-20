@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/montao/calc.svg?branch=master)](https://travis-ci.org/montao/calc)
 # calc
 A calculator done with GNU flex and bison. For more information, read the book by John Levine about flex and bison. 
 
